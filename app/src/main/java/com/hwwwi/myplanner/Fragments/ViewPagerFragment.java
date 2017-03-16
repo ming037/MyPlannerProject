@@ -1,4 +1,4 @@
-package com.hwwwi.myplanner;
+package com.hwwwi.myplanner.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,13 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hwwwi.myplanner.Fragments.CalenderFragment;
+import com.hwwwi.myplanner.Fragments.PlanFragment;
+import com.hwwwi.myplanner.Fragments.SettingFragment;
+import com.hwwwi.myplanner.Fragments.TodoFragment;
+import com.hwwwi.myplanner.R;
+
 /**
  * Created by hwi on 17. 3. 13.
  */
 
 public class ViewPagerFragment extends Fragment {
 
-    public static final String KEY_RECIPE_INDEX = "recipe_index";
+    public static final String KEY_TODO_INDEX = "todo_index";
 
     @Override
     public void onStop() {
@@ -33,9 +39,10 @@ public class ViewPagerFragment extends Fragment {
         //getActivity().setTitle(Recipes.names[index]);
         View view = inflater.inflate(R.layout.fragment_viewpager,container,false);
 
-        final fragment_tab1 tab1 = new fragment_tab1();
-        final fragment_tab2 tab2 = new fragment_tab2();
-        final fragment_tab3 tab3 = new fragment_tab3();
+        final CalenderFragment tab_calender = new CalenderFragment();
+        final TodoFragment tab_todo = new TodoFragment();
+        final PlanFragment tab_today = new PlanFragment();
+        final SettingFragment tab_setting = new SettingFragment();
 
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
@@ -43,24 +50,26 @@ public class ViewPagerFragment extends Fragment {
             @Override
             public Fragment getItem(int position) {
                 Fragment item;
-                if(position == 0) item = tab1;
-                else if(position ==1) item = tab2;
-                else item = tab3;
+                if(position == 0) item = tab_calender;
+                else if(position ==1) item = tab_today;
+                else if(position ==2) item = tab_todo;
+                else item = tab_setting;
                 return item;
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                String title;
-                if(position == 0) title = "tab1";
-                else if(position ==1) title = "tab2";
-                else title = "tab3";
+                String title ;
+                if(position == 0) title = "달력";
+                else if(position ==1) title = "계획";
+                else if(position ==2) title = "할 일";
+                else title = "설정";
                 return title;
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return 4;
             }
         });
 
